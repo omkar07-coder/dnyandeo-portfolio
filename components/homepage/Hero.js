@@ -17,12 +17,12 @@ export function HeroSection({
   secondaryButtonText = "Get In Touch",
 }) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0a0118] via-[#0f0728] to-[#1a0b2e]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0a0118] via-[#0f0728] to-[#1a0b2e] py-16 sm:py-0">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Gradient Orbs */}
         <motion.div 
-          className="absolute top-20 right-1/4 w-96 h-96 bg-blue-600/30 rounded-full blur-3xl"
+          className="absolute top-20 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-blue-600/30 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -34,7 +34,7 @@ export function HeroSection({
           }}
         />
         <motion.div 
-          className="absolute bottom-20 left-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl"
+          className="absolute bottom-20 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-purple-600/30 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.3, 0.5, 0.3],
@@ -69,18 +69,18 @@ export function HeroSection({
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <motion.div 
-            className="text-center lg:text-left space-y-4 sm:space-y-6"
+            className="text-center lg:text-left space-y-3 sm:space-y-4 md:space-y-6"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
             {/* Badge */}
             <motion.div 
-              className="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 backdrop-blur-sm text-xs sm:text-sm"
+              className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-600/20 border border-blue-500/30 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 backdrop-blur-sm text-xs sm:text-sm"
               initial={{ 
                 x: Math.random() * 400 - 200,
                 y: Math.random() * 400 - 200,
@@ -169,7 +169,7 @@ export function HeroSection({
 
             {/* Description */}
             <motion.div 
-              className="border-l-4 border-blue-500 pl-3 sm:pl-4"
+              className="border-l-2 sm:border-l-4 border-blue-500 pl-2 sm:pl-3 md:pl-4"
               initial={{ 
                 x: -100,
                 opacity: 0
@@ -193,10 +193,10 @@ export function HeroSection({
             </motion.div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 md:gap-4 pt-1 sm:pt-2 md:pt-4">
               <Link href="#project" className="w-full sm:w-auto">
                 <motion.button
-                  className="w-full group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -211,7 +211,7 @@ export function HeroSection({
               </Link>
               <Link href="#contact" className="w-full sm:w-auto">
                 <motion.button
-                  className="w-full group relative bg-transparent border-2 border-white/20 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold hover:border-blue-500 hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full group relative bg-transparent border-2 border-white/20 text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold hover:border-blue-500 hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

@@ -1,250 +1,135 @@
 'use client';
-import Link from "next/link"
-import { useState } from "react"
-import { FaBars, FaTimes } from "react-icons/fa"
-import { HiSparkles } from "react-icons/hi2"
-import { motion } from "framer-motion"
+
+import Link from "next/link";
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { HiSparkles } from "react-icons/hi2";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { href: "#home", label: "Home", isActive: true },
-    { href: "#project", label: "Projects", isActive: false },
-    { href: "#About", label: "About Me", isActive: false },
-    { href: "#skills", label: "Skills", isActive: false },
-    { href: "#contact", label: "Contact", isActive: false }
-  ]
+    { href: "#home", label: "Home" },
+    { href: "#project", label: "Projects" },
+    { href: "#about", label: "About" },
+    { href: "#skills", label: "Skills" },
+    { href: "#contact", label: "Contact" },
+  ];
 
   return (
-    <nav className="w-full px-4 sm:px-6 py-4 relative z-50">
-      <div className="max-w-7xl mx-auto relative">
-        {/* Animated Snake Border */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ padding: '-2px' }}>
-          <rect
-            className="snake-border"
-            x="2"
-            y="2"
-            width="calc(100% - 4px)"
-            height="calc(100% - 4px)"
-            rx="16"
-            fill="none"
-            stroke="url(#snakeGradient)"
-            strokeWidth="2"
-            strokeDasharray="1000"
-            strokeDashoffset="1000"
-          />
-          <defs>
-            <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#3B82F6" />
-              <stop offset="50%" stopColor="#8B5CF6" />
-              <stop offset="100%" stopColor="#EC4899" />
-            </linearGradient>
-          </defs>
-        </svg>
+    <nav className="w-full px-3 sm:px-5 py-3 fixed top-0 left-0 z-50">
+      <div className="max-w-7xl mx-auto">
+        {/* Main Navbar */}
+        <div className="relative flex items-center justify-between bg-[#0f1419]/90 backdrop-blur-xl border border-white/10 rounded-2xl px-4 sm:px-6 py-3 shadow-xl overflow-hidden">
 
-        <div className="relative bg-[#0f1419]/95 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-3 shadow-2xl">
-          <div className="flex items-center justify-between">
-            {/* Animated Logo Text */}
-            <motion.div 
-              className="flex items-center gap-2"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+          {/* Glow Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-40" />
+
+          {/* Logo */}
+          <Link href="/" className="relative z-10 flex items-center gap-2">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 15,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg"
             >
-              <motion.div
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">⚡</span>
-                </div>
-              </motion.div>
-              <Link href="/" className="group">
-                <motion.div className="flex items-center gap-1">
-                  {['D', 'n', 'y', 'a', 'n', 'd', 'e', 'o'].map((letter, index) => (
-                    <motion.span
-                      key={index}
-                      className="text-blue-400 font-bold text-lg inline-block"
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05, duration: 0.3 }}
-                      whileHover={{ 
-                        y: -5,
-                        color: "#60A5FA",
-                        transition: { duration: 0.2 }
-                      }}
-                    >
-                      {letter}
-                    </motion.span>
-                  ))}
-                  <span className="text-white font-bold text-lg ml-1">Shekade</span>
-                </motion.div>
-              </Link>
-              
-              {/* Vertical Divider - Desktop Only */}
-              <motion.div 
-                className="hidden lg:block w-px h-8 bg-gradient-to-b from-transparent via-blue-500 to-transparent ml-4"
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              />
+              <span className="text-white font-bold text-sm">⚡</span>
             </motion.div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
-              {navItems.map((item, index) => (
+            <h1 className="text-white font-bold text-base sm:text-lg md:text-xl whitespace-nowrap">
+              <span className="text-blue-400">dnyandeo</span> Shekade
+            </h1>
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex items-center gap-2 relative z-10">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href}>
                 <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + index * 0.1, duration: 0.3 }}
-                >
-                  <Link
-                    href={item.href}
-                    scroll={true}
-                    className="relative group"
-                  >
-                    <motion.div
-                      className={`px-5 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-                        item.isActive
-                          ? 'text-white'
-                          : 'text-gray-400'
-                      }`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {item.label}
-                      {item.isActive && (
-                        <motion.span
-                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full"
-                          layoutId="activeIndicator"
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        />
-                      )}
-                      {!item.isActive && (
-                        <span className="absolute inset-0 bg-white/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      )}
-                    </motion.div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <motion.div 
-              className="hidden md:block"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, duration: 0.3 }}
-            >
-              <Link href="#contact">
-                <motion.button
-                  className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-blue-500/30 overflow-hidden flex items-center gap-2"
-                  whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)" }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-300"
                 >
-                  {/* Animated Background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"
-                    initial={{ x: "100%" }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <span className="relative z-10">Let's Connect</span>
-                  <motion.div
-                    className="relative z-10"
-                    animate={{ rotate: [0, 15, -15, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <HiSparkles className="w-4 h-4" />
-                  </motion.div>
-                </motion.button>
+                  {item.label}
+                </motion.div>
               </Link>
-            </motion.div>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              onClick={toggleMenu}
-              className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors relative"
-              aria-label="Toggle menu"
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                animate={{ rotate: isMenuOpen ? 90 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {isMenuOpen ? (
-                  <FaTimes className="w-5 h-5" />
-                ) : (
-                  <FaBars className="w-5 h-5" />
-                )}
-              </motion.div>
-            </motion.button>
+            ))}
           </div>
 
-          {/* Mobile Navigation Menu */}
+          {/* Desktop CTA */}
+          <div className="hidden md:flex relative z-10">
+            <Link href="#contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 shadow-lg"
+              >
+                Let’s Connect
+                <HiSparkles className="w-4 h-4" />
+              </motion.button>
+            </Link>
+          </div>
+
+          {/* Mobile Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden relative z-10 text-white p-2 rounded-lg hover:bg-white/10 transition"
+          >
+            {isMenuOpen ? (
+              <FaTimes className="w-5 h-5" />
+            ) : (
+              <FaBars className="w-5 h-5" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
           {isMenuOpen && (
-            <motion.div 
-              className="lg:hidden mt-4 pt-4 border-t border-white/10"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.25 }}
+              className="lg:hidden mt-3 bg-[#0f1419]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl"
             >
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.href}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
                     <Link
                       href={item.href}
-                      scroll={true}
-                      onClick={closeMenu}
-                      className={`block px-4 py-3 rounded-lg font-medium text-sm transition-all duration-300 ${
-                        item.isActive
-                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 text-sm font-medium"
                     >
                       {item.label}
                     </Link>
                   </motion.div>
                 ))}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
+
+                {/* Mobile CTA */}
+                <Link
+                  href="#contact"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <Link href="#contact" onClick={closeMenu}>
-                    <button className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl text-sm font-semibold shadow-lg flex items-center justify-center gap-2">
-                      Let's Connect
-                      <HiSparkles className="w-4 h-4" />
-                    </button>
-                  </Link>
-                </motion.div>
+                  <button className="w-full mt-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg">
+                    Let’s Connect
+                    <HiSparkles className="w-4 h-4" />
+                  </button>
+                </Link>
               </div>
             </motion.div>
           )}
-        </div>
+        </AnimatePresence>
       </div>
     </nav>
-  )
+  );
 }
