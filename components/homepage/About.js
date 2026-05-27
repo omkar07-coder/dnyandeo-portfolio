@@ -1,263 +1,178 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useInView, useAnimation } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import {
-  Mail,
-  Github,
-  Linkedin,
-  Twitter,
-  Smile,
-  Code,
-  User,
-} from "lucide-react";
-import { LoadingSpinner } from "../common/Loading";
+import { FaGithub, FaLinkedin, FaTwitter, FaBriefcase } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { HiSparkles } from "react-icons/hi2";
 
 export function AboutMeSection({
   name = "Dnyandeo Shekade",
-  role = "Fullstack Developer at Yuva Nexus Tech",
+  role = "Fullstack Developer",
   experience = "2 Years Experience",
-  description = "I work as a Fullstack Developer at Yuva Nexus Tech, where my primary focus is building fullstack web applications. On the frontend, I design and develop responsive, user-friendly UIs using Next.js and Tailwind CSS while ensuring SEO-friendly structures for better search engine visibility. I also collaborate with my team to integrate APIs and ensure smooth functionality between frontend and backend. Recently, I’ve been expanding my skills into backend development, working with databases, authentication, and server-side logic.Currently, I am also working at Innovins Technologies (November 2025 – Present), where I contribute to developing scalable web applications, improving UI/UX experiences, integrating APIs, and optimizing application performance across both frontend and backend systems.",
+description = "I’m a passionate Fullstack Developer who loves building modern and user-friendly web applications. I mainly work with Next.js and Tailwind CSS to create clean, responsive, and SEO-friendly websites that perform smoothly across all devices. I also enjoy working with APIs and turning ideas into fast, scalable digital experiences. My focus is always on writing clean code and creating products that feel simple and seamless for users.",
+  experiences = [
+    {
+      company: "Yuva Nexus Tech",
+      position: "Fullstack Developer",
+      period: "Jan 2023 - Present",
+    },
+    {
+      company: "innovins technologies",
+      position: "Fullstack Developer",
+      period: "Jul 2021 - Dec 2022",
+    },
+   
+  ],
 
-  skills = "Currently exploring backend development — learning about database integration, authentication systems, server-side rendering in Next.js, and API creation. Along with that, I'm improving my understanding of SEO optimization techniques, performance improvements, and secure application deployment. Proficient in JavaScript, React, Next.js, MongoDB, TailwindCSS, and modern development tools.",
-  connectText = "Working on fullstack web applications including the BillingCart website - a static e-commerce platform for billing machines and POS printers with WhatsApp integration for B2B customers. Ready to collaborate on exciting projects and build innovative solutions together.",
+  skills = ["JavaScript", "CSS","HTML","SQL", "Next.js", "React", "Tailwind CSS", "MongoDB"],
+
+  connectText = "Working on fullstack web applications including the BillingCart website. Ready to collaborate!",
+  
   email = "shekadednyande@gmail.com",
   githubUrl = "https://github.com/dnyandeoShekade",
   linkedinUrl = "https://www.linkedin.com/in/dnyandeo-shekade-b75016334/",
   twitterUrl = "https://x.com/DnyandeoShekade",
-  skillsImage = "/img/project/skills.png",
-  connectImage = "/img/project/connect-1.jpg",
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const controls = useAnimation();
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
-
-  useEffect(() => {
-    // Preload critical images
-    const imageUrls = [skillsImage, connectImage];
-    const imagePromises = imageUrls.map((url) => {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = url;
-      });
-    });
-
-    Promise.all(imagePromises)
-      .then(() => setImagesLoaded(true))
-      .catch(() => setImagesLoaded(true)); // Still show content even if images fail
-  }, [skillsImage, connectImage]);
-
-  // Simplified animations for better performance
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05, // Reduced stagger for faster loading
-        duration: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 }, // Reduced movement for better performance
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, ease: "easeOut" },
-    },
-  };
-
-  const headingVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
-  };
 
   return (
-    <section
-      id="About"
-      className="relative overflow-hidden px-4 lg:px-8 py-14 bg-[#050816]"
-    >
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-blue-700/15 blur-[140px]" />
-        <div className="absolute right-0 bottom-0 w-[350px] h-[350px] bg-purple-700/15 blur-[140px]" />
+    <section id="About" className="relative px-4 lg:px-8 py-20 bg-gradient-to-br from-[#0a0118] via-[#0f0728] to-[#1a0b2e] overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Gradient Orbs */}
+        <div className="absolute top-20 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Title */}
-        <div className="mb-8">
-          <h2 className="text-white text-3xl md:text-4xl font-bold">
-            About <span className="text-blue-400">Me</span>
+        <div className="mb-12">
+          <h2 className="text-white text-4xl font-bold">
+            About <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Me</span>
           </h2>
-
-          <div className="w-14 h-[3px] mt-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+          <div className="w-16 h-1 mt-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </div>
 
-        {/* Main */}
-        <div
-          className="
-      rounded-[24px]
-      border border-white/10
-      bg-gradient-to-br
-      from-[#0B1228]
-      to-[#111827]
-      p-6
-      "
-        >
-          <div className="grid lg:grid-cols-[220px_1fr_240px] gap-6">
-            {/* LEFT */}
-            <div className="flex flex-col items-center">
-              <div
-                className="
-            w-[170px]
-            h-[170px]
-            rounded-full
-            p-[2px]
-            bg-gradient-to-r
-            from-blue-500
-            via-purple-500
-            to-cyan-400
-            "
-              >
-              
-              </div>
-
-              <div className="mt-4 px-4 py-2 rounded-full bg-green-500/10">
-                <span className="text-green-400 text-sm">● Available</span>
-              </div>
-            </div>
-
-            {/* CENTER */}
-            <div>
-              <div className="inline-flex px-4 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm mb-4">
-                FULLSTACK
-              </div>
-
-              <h1 className="text-3xl font-bold text-white">
-                Hey there! I'm
-                <span className="block text-blue-400">{name}</span>
-              </h1>
-
-              <p className="mt-3 text-blue-100 text-sm">✨ {experience}</p>
-
-              <p className="mt-5 text-gray-400 text-sm leading-7 max-w-[520px] line-clamp-5">
-                {description}
-              </p>
-            </div>
-
-            {/* RIGHT */}
-            <div className="space-y-3">
-              {[
-                ["Frontend", "Next.js + Tailwind"],
-                ["Backend", "API + Database"],
-                ["Team", "Collaboration"],
-              ].map(([title, desc]) => (
-                <div
-                  key={title}
-                  className="
-              p-4
-              rounded-xl
-              bg-white/[0.03]
-              border
-              border-white/5
-              "
-                >
-                  <h3 className="text-white text-sm font-semibold">{title}</h3>
-
-                  <p className="text-gray-400 text-xs mt-1">{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="grid lg:grid-cols-2 gap-5 mt-5">
-          {/* Skills */}
-          <div className="rounded-[24px] p-6 bg-[#0B1228] border border-white/10">
-            <h3 className="text-xl text-white mb-5">Skills</h3>
-
-            <div className="grid grid-cols-3 gap-3">
-              {["JS", "TS", "Next", "React", "Tailwind", "Mongo"].map(
-                (skill) => (
-                  <div
-                    key={skill}
-                    className="
-              h-[80px]
-              rounded-xl
-              bg-white/5
-              flex
-              items-center
-              justify-center
-              text-sm
-              text-white
-              "
-                  >
-                    {skill}
-                  </div>
-                ),
-              )}
-            </div>
-          </div>
-
-          {/* Connect */}
-          <div className="rounded-[24px] p-6 bg-[#0B1228] border border-white/10">
-            <h3 className="text-xl text-white">Connect</h3>
-
-            <p className="text-gray-400 text-sm mt-3 line-clamp-3">
-              {connectText}
-            </p>
-
-            <div className="grid grid-cols-2 gap-3 mt-5">
-              {[
-                ["Email", email],
-                ["GitHub", "github"],
-                ["LinkedIn", "linkedin"],
-                ["Twitter", "twitter"],
-              ].map(([title, val]) => (
-                <div
-                  key={title}
-                  className="
-              p-3
-              rounded-xl
-              bg-white/5
-              "
-                >
-                  <p className="text-white text-sm">{title}</p>
-
-                  <span className="text-gray-400 text-xs truncate block">
-                    {val}
+        {/* Main Content */}
+        <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-2xl">
+          <div className="grid lg:grid-cols-[1fr_320px] gap-10">
+            {/* Left Column */}
+            <div className="space-y-6">
+              {/* Header */}
+              <div>
+                <div className="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 rounded-full px-4 py-2 backdrop-blur-sm mb-3">
+                  <span className="text-blue-300 text-xs font-semibold uppercase tracking-wider">
+                    {role}
                   </span>
                 </div>
-              ))}
+                <h3 className="text-2xl font-bold mt-3 mb-2">
+                  <span className="text-white">Hey there! I'm </span>
+                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">{name}</span>
+                </h3>
+                <div className="flex items-center gap-2 text-gray-400 text-sm">
+                  <FaBriefcase className="w-3.5 h-3.5 text-blue-400" />
+                  <span>{experience}</span>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="border-l-4 border-blue-500 pl-4">
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {description}
+                </p>
+              </div>
+
+              {/* Skills and Connect - Side by Side */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Skills */}
+                <div>
+                  <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                    Skills
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1.5 rounded-lg bg-blue-600/10 border border-blue-500/20 text-blue-300 text-xs font-medium hover:bg-blue-600/20 transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Connect */}
+                <div>
+                  <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                    Connect
+                  </h4>
+                  {/* <p className="text-gray-300 text-sm mb-4">{connectText}</p> */}
+                  
+                  {/* Social Links */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <a
+                      href={`mailto:${email}`}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-600/10 border border-purple-500/20 text-purple-300 text-xs hover:bg-purple-600/20 transition-colors"
+                    >
+                      <MdEmail className="w-3.5 h-3.5" />
+                      <span>Email</span>
+                    </a>
+                    <a
+                      href={githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-600/10 border border-purple-500/20 text-purple-300 text-xs hover:bg-purple-600/20 transition-colors"
+                    >
+                      <FaGithub className="w-3.5 h-3.5" />
+                      <span>GitHub</span>
+                    </a>
+                    <a
+                      href={linkedinUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-600/10 border border-purple-500/20 text-purple-300 text-xs hover:bg-purple-600/20 transition-colors"
+                    >
+                      <FaLinkedin className="w-3.5 h-3.5" />
+                      <span>LinkedIn</span>
+                    </a>
+                    {/* <a
+                      href={twitterUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-600/10 border border-purple-500/20 text-purple-300 text-xs hover:bg-purple-600/20 transition-colors"
+                    >
+                      <FaTwitter className="w-3.5 h-3.5" />
+                      <span>Twitter</span>
+                    </a> */}
+                  </div>                
+                </div>
+              </div>
             </div>
 
-            <button
-              className="
-          mt-5
-          w-full
-          py-3
-          rounded-xl
-          bg-gradient-to-r
-          from-purple-600
-          to-blue-600
-          text-sm
-          text-white
-          "
-            >
-              ✨ Work Together
-            </button>
+            {/* Right Column - Experience */}
+            <div>
+              <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
+                Experience
+              </h4>
+              
+              <div className="space-y-4">
+                {experiences.map((exp, index) => (
+                  <div key={index} className="flex gap-3 group">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/20 flex items-center justify-center group-hover:border-blue-500/40 transition-colors">
+                      <FaBriefcase className="w-4 h-4 text-blue-400" />
+                    </div>
+                    
+                    <div>
+                      <h5 className="text-white font-medium text-sm">{exp.company}</h5>
+                      <p className="text-gray-400 text-xs mt-0.5">{exp.position}</p>
+                      <p className="text-gray-500 text-xs mt-1">{exp.period}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
