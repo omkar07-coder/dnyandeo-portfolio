@@ -69,18 +69,18 @@ export function HeroSection({
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <motion.div 
-            className="text-left space-y-6"
+            className="text-center lg:text-left space-y-4 sm:space-y-6"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
             {/* Badge */}
             <motion.div 
-              className="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 rounded-full px-4 py-2 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 backdrop-blur-sm text-xs sm:text-sm"
               initial={{ 
                 x: Math.random() * 400 - 200,
                 y: Math.random() * 400 - 200,
@@ -102,12 +102,12 @@ export function HeroSection({
               }}
             >
               <HiSparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-blue-300 text-sm font-medium">{badge}</span>
+              <span className="text-blue-300 text-xs sm:text-sm font-medium">{badge}</span>
             </motion.div>
 
             {/* Title with Scatter Animation */}
             <div className="overflow-hidden">
-              <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight">
                 {title.split('').map((char, index) => (
                   <motion.span
                     key={index}
@@ -136,7 +136,7 @@ export function HeroSection({
                   </motion.span>
                 ))}
               </h1>
-              <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight">
                 {subtitle.split('').map((char, index) => (
                   <motion.span
                     key={index}
@@ -169,7 +169,7 @@ export function HeroSection({
 
             {/* Description */}
             <motion.div 
-              className="border-l-4 border-blue-500 pl-4"
+              className="border-l-4 border-blue-500 pl-3 sm:pl-4"
               initial={{ 
                 x: -100,
                 opacity: 0
@@ -184,19 +184,19 @@ export function HeroSection({
                 delay: 1.5
               }}
             >
-              <p className="text-blue-400 text-lg font-semibold mb-2">
+              <p className="text-blue-400 text-base sm:text-lg font-semibold mb-1 sm:mb-2">
                 Hi! I'm <span className="text-white">{name}</span>
               </p>
-              <p className="text-gray-400 text-base leading-relaxed">
+              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
                 {description}
               </p>
             </motion.div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="#project">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
+              <Link href="#project" className="w-full sm:w-auto">
                 <motion.button
-                  className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-base font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -209,9 +209,9 @@ export function HeroSection({
                   </motion.span>
                 </motion.button>
               </Link>
-              <Link href="#contact">
+              <Link href="#contact" className="w-full sm:w-auto">
                 <motion.button
-                  className="group relative bg-transparent border-2 border-white/20 text-white px-8 py-4 rounded-xl text-base font-semibold hover:border-blue-500 hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full group relative bg-transparent border-2 border-white/20 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-semibold hover:border-blue-500 hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -437,17 +437,17 @@ export function HeroSection({
 
         {/* Scroll Down Indicator */}
         <motion.div 
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hidden sm:flex"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
         >
-          <span className="text-gray-400 text-sm">Scroll Down</span>
+          <span className="text-gray-400 text-xs sm:text-sm">Scroll Down</span>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <FiArrowDown className="w-6 h-6 text-blue-400" />
+            <FiArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
           </motion.div>
         </motion.div>
       </div>
